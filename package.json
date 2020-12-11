@@ -1,0 +1,16 @@
+{
+  "name": "mscz-api",
+  "version": "0.0.0",
+  "description": "HTTP API to manage MSCZ files.",
+  "main": "src/index.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LibreScore/mscz-api.git"
+  },
+  "author": "Librescore",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/LibreScore/mscz-api/issues"
+  },
+  "homepage": "https://github.com/LibreScore/mscz-api#readme"
+}
