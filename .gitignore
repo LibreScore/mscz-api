@@ -4,3 +4,10 @@ node_modules/
 
 # config files
 config.json
+
+# Temporary
+temp/
+
+# logs and application-specific
+mscz-api.log
+dist/

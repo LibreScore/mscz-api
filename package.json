@@ -2,15 +2,37 @@
   "name": "mscz-api",
   "version": "0.0.0",
   "description": "HTTP API to manage MSCZ files.",
-  "main": "src/index.ts",
+  "main": "mscz-api.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/LibreScore/mscz-api.git"
+  },
+  "scripts": {
+    "tsc": "tsc"
   },
   "author": "Librescore",
   "license": "GPL-3.0",
   "bugs": {
     "url": "https://github.com/LibreScore/mscz-api/issues"
   },
-  "homepage": "https://github.com/LibreScore/mscz-api#readme"
+  "homepage": "https://github.com/LibreScore/mscz-api#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "content-type": "^1.0.4",
+    "express": "^4.17.1",
+    "nconf": "^0.11.0",
+    "raw-body": "^2.4.1",
+    "webmscore": "^0.10.4",
+    "winston": "^3.3.3"
+  },
+  "devDependencies": {
+    "@types/body-parser": "^1.19.0",
+    "@types/content-type": "^1.1.3",
+    "@types/express": "^4.17.9",
+    "@types/nconf": "^0.10.0",
+    "@types/node": "^14.14.12",
+    "@types/raw-body": "^2.3.0",
+    "@types/winston": "^2.4.4",
+    "typescript": "^4.1.3"
+  }
 }
