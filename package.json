@@ -2,7 +2,7 @@
   "name": "mscz-api",
   "version": "0.0.0",
   "description": "HTTP API to manage MSCZ files.",
-  "main": "mscz-api.js",
+  "main": "dist/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/LibreScore/mscz-api.git"
