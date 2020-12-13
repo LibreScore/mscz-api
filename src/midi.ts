@@ -1,6 +1,7 @@
 import winston from "winston";
 import webmscore from "webmscore";
 import { RequestHandler } from "express";
+import nconf from "nconf";
 
 export default ((req, res) => {
     winston.http("/midi accessed.");
@@ -13,7 +14,7 @@ export default ((req, res) => {
         }
         const soundFontData = new Uint8Array(
             await (
-                await fetch("ftp://ftp.osuosl.org/pub/musescore/soundfont/MuseScore_General/MuseScore_General.sf3")
+                await fetch(nconf.get("soundFile"))
             ).arrayBuffer()
         );
         const metadata = await score.metadata();
