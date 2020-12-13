@@ -1,8 +1,6 @@
 import winston from "winston";
 import webmscore from "webmscore";
 import { RequestHandler } from "express";
-import nconf from "nconf";
-import axios from "axios";
 
 export default ((req, res) => {
     winston.http("/midi accessed.");
