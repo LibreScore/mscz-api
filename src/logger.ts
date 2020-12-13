@@ -11,7 +11,7 @@ export default (): void => {
     formats.push(winston.format.colorize());
     formats.push((winston.format(msg => {
         // Custom timestamp
-        msg.level = `[${Math.floor(Date.now() / 100)}] ${msg.level}`;
+        msg.level = `[${Math.floor(Date.now() / 1000)}] ${msg.level}`;
         return msg;
     }))());
     formats.push(winston.format.splat());
