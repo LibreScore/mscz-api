@@ -2,7 +2,7 @@ import winston from "winston";
 import webmscore from "webmscore";
 import { RequestHandler } from "express";
 
-module.exports = ((req, res) => {
+export default ((req, res) => {
     winston.http("/meta accessed.");
     webmscore.ready.then(async () => {
         let score;

@@ -6,7 +6,7 @@ import nconf from "nconf";
 export default (): void => {
     if (!winston.format) return;
 
-    // From stucco: https://github.com/Toad39/stucco
+    // Improved from stucco: https://github.com/Toad39/stucco
     const formats: Logform.Format[] = [];
     formats.push(winston.format.colorize());
     formats.push((winston.format(msg => {
