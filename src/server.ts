@@ -27,4 +27,4 @@ function listen() {
     });
 };
 
-export {server, app, listen};
+export default {server, app, listen};

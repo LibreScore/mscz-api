@@ -18,7 +18,7 @@
 
 import nconf from "nconf";
 import setupLogger from "./logger";
-import * as server from "./server";
+import server from "./server";
 
 // Set config
 nconf.argv().env({ separator: "." }).file({
