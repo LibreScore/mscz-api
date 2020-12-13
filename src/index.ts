@@ -22,7 +22,7 @@ import server from "./server";
 
 // Set config
 nconf.argv().env({ separator: "." }).file({
-    file: "./config.json"
+    file: nconf.get("config") || "./config.json"
 });
 
 // Setup logger

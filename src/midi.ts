@@ -2,6 +2,7 @@ import winston from "winston";
 import webmscore from "webmscore";
 import { RequestHandler } from "express";
 import nconf from "nconf";
+import axios from "axios";
 
 export default ((req, res) => {
     winston.http("/midi accessed.");
@@ -12,11 +13,19 @@ export default ((req, res) => {
             res.sendStatus(400).send(e);
             return;
         }
-        const soundFontData = new Uint8Array(
-            await (
-                await fetch(nconf.get("soundFile"))
-            ).arrayBuffer()
-        );
         const metadata = await score.metadata();
-    })
+
+        // Excerpt: eid is the id found in metadata.
+        await score.generateExcerpts();
+        await score.setExcerptId(metadata.excerpts[req.params.eid].id);
+
+        // Do the actual conversion.
+        const midi = await (score.saveMidi());
+
+        // Send it off.
+        res.contentType("audio/midi");
+        res.send(Buffer.from(midi));
+
+        score.destroy();
+    });
 }) as RequestHandler;

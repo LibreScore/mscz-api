@@ -19,12 +19,13 @@ app.use(bodyParser.raw({
 
 // Add each route.
 app.post("/meta", meta);
+app.post("/midi/:eid", midi);
 
 // Listen.
 function listen() {
     server.listen(3000, () => {
         winston.info("mscz-api online.");
     });
-};
+}
 
 export default {server, app, listen};
