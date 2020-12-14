@@ -29,6 +29,7 @@ export default ((req, res) => {
         const midi = await (score.saveMidi());
 
         // Send it off.
+        res.setHeader("Content-Disposition", `attachement; filename=${await score.titleFilenameSafe()}_${req.params.eid || "FULLSCORE"}`);
         res.contentType("audio/midi");
         res.send(Buffer.from(midi));
 
