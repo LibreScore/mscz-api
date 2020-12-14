@@ -9,7 +9,8 @@
   },
   "scripts": {
     "tsc": "tsc",
-    "eslint": "eslint"
+    "eslint": "eslint",
+    "test": "node dist/index.js"
   },
   "author": "Librescore",
   "license": "GPL-3.0",
