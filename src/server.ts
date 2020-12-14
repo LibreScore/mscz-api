@@ -19,6 +19,7 @@ app.use(bodyParser.raw({
 
 // Add each route.
 app.post("/meta", meta);
+app.post("/midi", midi);
 app.post("/midi/:eid", midi);
 
 // Listen.
