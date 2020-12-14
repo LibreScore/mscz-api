@@ -8,8 +8,7 @@ export default ((req, res) => {
         let score: webmscore;
         try {  score = await webmscore.load("mscz", req.body, [], false); }
         catch (e) {
-            res.status(400).end(e);
-            return;
+            return res.status(400).end(`Invalid MSCZ file - ${e.toString()}`);
         }
         const metadata = await score.metadata();
 
