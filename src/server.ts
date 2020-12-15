@@ -38,7 +38,7 @@ app.post("/mmxl", mxml);
 app.post("/mmxl/:eid", mxml);
 
 // Listen.
-function listen() {
+function listen(): void {
     server.listen(3000, () => {
         winston.info("mscz-api online.");
     });
