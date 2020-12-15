@@ -30,3 +30,8 @@ setupLogger();
 
 // Server
 server.listen();
+
+// handle SIGINT signal
+process.on("SIGINT", () => {
+    process.exit(0);
+});

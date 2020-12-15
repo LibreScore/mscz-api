@@ -11,7 +11,8 @@
     "build": "tsc",
     "watch": "tsc --watch",
     "eslint": "eslint",
-    "test": "node dist/index.js"
+    "start": "node dist/index.js",
+    "stop": "fuser -k -INT 3000/tcp"
   },
   "author": "Librescore",
   "license": "GPL-3.0",

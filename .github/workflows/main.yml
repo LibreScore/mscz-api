@@ -26,4 +26,7 @@ jobs:
       - name: Build and Run
         run: |
           npm install
-          npm run tsc
+          npm run build
+          npm start &
+          sleep 1 # do something
+          npm stop
