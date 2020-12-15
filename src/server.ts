@@ -7,6 +7,7 @@ import bodyParser from "body-parser";
 // Targets
 import meta from "./meta";
 import midi from "./midi";
+import mxml from "./musicxml";
 
 const app = express();
 const server = http.createServer(app);
@@ -19,8 +20,12 @@ app.use(bodyParser.raw({
 
 // Add each route.
 app.post("/meta", meta);
+
 app.post("/midi", midi);
 app.post("/midi/:eid", midi);
+
+app.post("/mxml", mxml);
+app.post("/mxml/:eid", mxml);
 
 // Listen.
 function listen() {

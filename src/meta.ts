@@ -6,10 +6,10 @@ export default (async (req, res) => {
     winston.http("/meta accessed.");
     await webmscore.ready;
 
-    let score;
+    let score: webmscore;
     try {  score = await webmscore.load("mscz", req.body, [], false); }
     catch (e) {
-        return res.sendStatus(400).send(e);
+        return res.sendStatus(400).send(`Invalid MSCZ file - ${e.toString()}`);
     }
     const metadata = await score.metadata();
 

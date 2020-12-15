@@ -3,13 +3,13 @@ import webmscore from "webmscore";
 import { RequestHandler } from "express";
 
 export default (async (req, res) => {
-    winston.http("/midi accessed.");
+    winston.http("/meta accessed.");
     await webmscore.ready;
 
     let score: webmscore;
     try {  score = await webmscore.load("mscz", req.body, [], false); }
     catch (e) {
-        return res.status(400).end(`Invalid MSCZ file - ${e.toString()}`);
+        return res.sendStatus(400).send(e);
     }
     const metadata = await score.metadata();
 
@@ -25,12 +25,12 @@ export default (async (req, res) => {
     }
 
     // Do the actual conversion.
-    const midi = await (score.saveMidi());
+    const mxml = await (score.saveXml());
 
     // Send it off.
-    res.setHeader("Content-Disposition", `attachement; filename=${await score.titleFilenameSafe()}_${req.params.eid || "FULLSCORE"}.mid`);
-    res.contentType("audio/midi");
-    res.send(Buffer.from(midi));
+    res.setHeader("Content-Disposition", `attachement; filename=${await score.titleFilenameSafe()}_${req.params.eid || "FULLSCORE"}.musicxml`);
+    res.contentType("application/xml");
+    res.send(mxml);
 
     score.destroy();
 }) as RequestHandler;
