@@ -3,6 +3,7 @@ import http from "http";
 import express from "express";
 import winston from "winston";
 import bodyParser from "body-parser";
+import rateLimit from "express-rate-limit";
 
 // Targets
 import meta from "./meta";
@@ -11,6 +12,12 @@ import mxml from "./musicxml";
 
 const app = express();
 const server = http.createServer(app);
+
+// Rate limit: 100 requests for 10 minutes.
+app.use(rateLimit({
+    windowMs: 10 * 60 * 1000,
+    max: 100
+}));
 
 // Raw body for MSCZ file.
 app.use(bodyParser.raw({
