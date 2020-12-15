@@ -34,6 +34,9 @@ app.post("/midi/:eid", midi);
 app.post("/mxml", mxml);
 app.post("/mxml/:eid", mxml);
 
+app.post("/mmxl", mxml);
+app.post("/mmxl/:eid", mxml);
+
 // Listen.
 function listen() {
     server.listen(3000, () => {
