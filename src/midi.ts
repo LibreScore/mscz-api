@@ -19,7 +19,7 @@ export default (async (req, res) => {
         if (metadata.excerpts[req.params.eid]) {
             await score.setExcerptId(metadata.excerpts[req.params.eid].id);
         } else {
-            res.status(400).end("Invalid instrument.");
+            res.status(400).end("Invalid excerpt.");
             return score.destroy();
         }
     }
