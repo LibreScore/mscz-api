@@ -12,7 +12,7 @@
     "watch": "tsc --watch",
     "eslint": "eslint",
     "start": "node dist/index.js",
-    "stop": "fuser -k -INT 3000/tcp"
+    "stop": "fuser -s -k -INT 3000/tcp"
   },
   "author": "Librescore",
   "license": "GPL-3.0",
