@@ -26,7 +26,7 @@
     "express": "^4.17.1",
     "express-rate-limit": "^5.2.3",
     "nconf": "^0.11.0",
-    "webmscore": "^0.13.0",
+    "webmscore": "^0.13.2",
     "winston": "^3.3.3"
   },
   "devDependencies": {
