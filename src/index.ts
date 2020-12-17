@@ -17,6 +17,7 @@
 */
 
 import nconf from "nconf";
+import winston from "winston";
 import setupLogger from "./logger";
 import server from "./server";
 
@@ -27,6 +28,15 @@ nconf.argv().env({ separator: "." }).file({
 
 // Setup logger
 setupLogger();
+
+// Information
+
+winston.info("mscz-api v2.0");
+winston.info("Copyright (C) 2020  Librescore");
+winston.info("This program comes with ABSOLUTELY NO WARRANTY");
+winston.info("This is free software, and you are welcome to redistribute it under certain conditions.");
+winston.info("---------------------------------------------------------------------------------------");
+
 
 // Server
 server.listen();
