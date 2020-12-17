@@ -18,7 +18,7 @@ and sends back a JSON file with metadata. Here would be an example of the metada
 ```
 ### Conversion Formats
 For conversion, you `POST /<format>/<instrument>`. The available formats are `midi`,
-`pdf`,`musicxml`, and `mp3`. It will return the appropriate mime-type for `<format>`.
+`mxml`, and `mmxl`. It will return the appropriate mime-type for `<format>`.
 `<instument>` is the ID of the excerpt from the metadata, so a `/meta` request should
 be made before conversion. Simply `POST /<format>` for the full score.
 ### Error codes
