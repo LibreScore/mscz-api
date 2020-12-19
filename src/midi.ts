@@ -3,7 +3,7 @@ import webmscore from "webmscore";
 import { RequestHandler } from "express";
 
 export default (async (req, res) => {
-    winston.http("/midi accessed.");
+    winston.http("MIDI accessed.");
     await webmscore.ready;
 
     let score: webmscore;
