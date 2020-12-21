@@ -1,27 +1,16 @@
 import winston from "winston";
 import webmscore from "webmscore";
 import { RequestHandler } from "express";
+import * as mscore from "./mscore";
+import * as error from "./error";
 
 export default (async (req, res) => {
     winston.http("MIDI accessed.");
-    await webmscore.ready;
 
     let score: webmscore;
-    try {  score = await webmscore.load("mscz", req.body, [], false); }
+    try { score = await mscore.mkScore(req.body, req.params.eid) }
     catch (e) {
-        return res.status(400).end(`Invalid MSCZ file - ${e.toString()}`);
-    }
-    const metadata = await score.metadata();
-
-    // Excerpt: eid is the id found in metadata.
-    await score.generateExcerpts();
-    if (req.params.eid) {
-        if (metadata.excerpts[req.params.eid]) {
-            await score.setExcerptId(metadata.excerpts[req.params.eid].id);
-        } else {
-            res.status(400).end("Invalid excerpt.");
-            return score.destroy();
-        }
+        return error.handleHTTP(res, e);
     }
 
     // Do the actual conversion.

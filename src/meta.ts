@@ -1,19 +1,20 @@
 import winston from "winston";
 import webmscore from "webmscore";
 import { RequestHandler } from "express";
+import * as mscore from "./mscore";
+import * as error from "./error";
 
 export default (async (req, res) => {
     winston.http("META accessed.");
-    await webmscore.ready;
 
     let score: webmscore;
-    try {  score = await webmscore.load("mscz", req.body, [], false); }
+    try { score = await mscore.mkScore(req.body) }
     catch (e) {
-        return res.status(400).send(`Invalid MSCZ file - ${e.toString()}`);
+        return error.handleHTTP(res, e);
     }
-    const metadata = await score.metadata();
 
-    res.json(metadata);
+    const meta = await score.metadata();
+    res.json(meta);
 
     score.destroy();
 }) as RequestHandler;
