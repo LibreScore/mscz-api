@@ -4,13 +4,25 @@ are/will be hardcoded for the API so there is no need to replace it. An example 
 sound font files.
 */
 import webmscore from "webmscore";
+import SOUNDFONT_FILES from "@librescore/sf3";
 import fs from "fs";
 import LocalError from "./error";
 import winston from "winston";
 
-// Init score with boost mode.
-async function mkScore(scoreData: Uint8Array, excerpt="", boost=true, soundFont=false) {
+const ready = (async function () {
     await webmscore.ready;
+
+    // Audio needs soundfonts
+    // From https://github.com/Xmader/musescore-downloader/blob/master/src/mscore.ts
+    const SF3 = Object.values(SOUNDFONT_FILES)[0] as string;
+    const data = await fs.promises.readFile(SF3);
+    await webmscore["setSoundFont"](data);
+})();
+
+// Init score with boost mode.
+async function mkScore(scoreData: Uint8Array, excerpt = "", boost = true): Promise<webmscore> {
+    await ready;
+
     let score: webmscore;
     if (boost) {
         try {
@@ -24,14 +36,6 @@ async function mkScore(scoreData: Uint8Array, excerpt="", boost=true, soundFont=
         } catch (e) {
             throw new LocalError(0);
         }
-    }
-
-    if (soundFont) {
-        // Audio needs soundfonts
-        // From https://github.com/Xmader/musescore-downloader/blob/master/src/mscore.ts
-        const SF3 = Object.values(require("@librescore/sf3"))[0] as string;
-        const data = await fs.promises.readFile(SF3);
-        await score.setSoundFont(data);
     }
 
     const metadata = await score.metadata();
@@ -48,6 +52,6 @@ async function mkScore(scoreData: Uint8Array, excerpt="", boost=true, soundFont=
     }
 
     return score;
-};
+}
 
 export { mkScore };
