@@ -25,7 +25,7 @@ import server from "./server";
 nconf.argv().env({ separator: "." }).file({
     file: nconf.get("config") || "./config.json"
 });
-nconf.set("version", "0.2.1");
+nconf.set("version", "0.3");
 
 // Setup logger
 setupLogger();
