@@ -25,13 +25,14 @@ import server from "./server";
 nconf.argv().env({ separator: "." }).file({
     file: nconf.get("config") || "./config.json"
 });
+nconf.set("version", "0.2.1");
 
 // Setup logger
 setupLogger();
 
 // Information
 
-winston.info("mscz-api v0.2.1");
+winston.info(`mscz-api v${nconf.get("version")}`);
 winston.info("Copyright (C) 2020  Librescore");
 winston.info("This program comes with ABSOLUTELY NO WARRANTY");
 winston.info("This is free software, and you are welcome to redistribute it under certain conditions.");

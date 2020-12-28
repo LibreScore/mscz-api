@@ -22,6 +22,12 @@ app.use(bodyParser.raw({
     limit: "10mb"
 }));
 
+// version header
+app.use((req, res, next) => {
+    res.setHeader("X-API-Version", nconf.get("version"));
+    next();
+});
+
 // Endpoints
 app.post("/:target", endpoints);
 app.post("/:target/:eid", endpoints);
@@ -33,4 +39,4 @@ function listen(): void {
     });
 }
 
-export default {server, app, listen};
+export default { server, app, listen };
