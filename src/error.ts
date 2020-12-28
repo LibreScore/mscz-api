@@ -38,4 +38,4 @@ export default LocalError;
 function handleHTTP(res: express.Response, err: LocalError) {
     res.status(LocalError.errorCodes[err.code] || 500).send(err.message);
 }
-export {handleHTTP};
+export { handleHTTP };

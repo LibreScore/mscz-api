@@ -3,12 +3,12 @@ import midi from "./midi";
 import musicxml from "./musicxml";
 import audio from "./audio";
 
-import {RequestHandler} from "express";
+import { RequestHandler } from "express";
 import LocalError, { handleHTTP } from "./error";
 
 const endpointDefs = {
     "meta": meta,
-    
+
     "midi": midi,
 
     "mxml": musicxml,

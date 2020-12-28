@@ -8,11 +8,11 @@ export default (async (req, res) => {
     winston.http("MUSICXML accessed.");
 
     let score: webmscore;
-    try { score = await mscore.mkScore(req.body, req.params.eid) }
+    try { score = await mscore.mkScore(req.body, req.params.eid); }
     catch (e) {
         return error.handleHTTP(res, e);
     }
-    
+
     if (req.params.target === "mmxl") {
         const mxml = await (score.saveMxl());
 
