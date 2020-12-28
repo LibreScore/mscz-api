@@ -6,9 +6,10 @@ sound font files.
 import webmscore from "webmscore";
 import fs from "fs";
 import LocalError from "./error";
+import winston from "winston";
 
 // Init score with boost mode.
-async function mkScore(scoreData: Uint8Array, excerpt="", boost=true) {
+async function mkScore(scoreData: Uint8Array, excerpt="", boost=true, soundFont=false) {
     await webmscore.ready;
     let score: webmscore;
     if (boost) {
@@ -23,7 +24,10 @@ async function mkScore(scoreData: Uint8Array, excerpt="", boost=true) {
         } catch (e) {
             throw new LocalError(0);
         }
-        
+    }
+
+    if (soundFont) {
+        // Audio needs soundfonts
         // From https://github.com/Xmader/musescore-downloader/blob/master/src/mscore.ts
         const SF3 = Object.values(require("@librescore/sf3"))[0] as string;
         const data = await fs.promises.readFile(SF3);

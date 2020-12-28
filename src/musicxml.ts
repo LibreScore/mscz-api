@@ -13,7 +13,7 @@ export default (async (req, res) => {
         return error.handleHTTP(res, e);
     }
     
-    if (req.url.startsWith("/mmxl")) {
+    if (req.params.target === "mmxl") {
         const mxml = await (score.saveMxl());
 
         // Send it off.
