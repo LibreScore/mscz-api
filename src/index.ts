@@ -25,7 +25,8 @@ import server from "./server";
 nconf.argv().env({ separator: "." }).file({
     file: nconf.get("config") || "./config.json"
 });
-nconf.set("version", "0.3");
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+nconf.set("version", require("../package.json").version);
 
 // Setup logger
 setupLogger();

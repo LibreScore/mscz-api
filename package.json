@@ -1,6 +1,6 @@
 {
   "name": "mscz-api",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "HTTP API to manage MSCZ files.",
   "main": "dist/index.js",
   "repository": {
