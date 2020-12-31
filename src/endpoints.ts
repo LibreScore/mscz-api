@@ -2,6 +2,7 @@ import meta from "./meta";
 import midi from "./midi";
 import musicxml from "./musicxml";
 import audio from "./audio";
+import sheet from "./sheet";
 
 import { RequestHandler } from "express";
 import LocalError, { handleHTTP } from "./error";
@@ -17,7 +18,9 @@ const endpointDefs = {
     "mp3": audio,
     "ogg": audio,
     "flac": audio,
-    "wav": audio
+    "wav": audio,
+
+    "pdf": sheet
 };
 
 export default (async (req, res) => {
