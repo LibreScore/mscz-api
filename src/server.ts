@@ -34,7 +34,7 @@ app.post("/:target/:eid", endpoints);
 
 // Listen.
 function listen(): void {
-    server.listen(3000, () => {
+    server.listen(nconf.get("port") || 3000, () => {
         winston.info("mscz-api online.");
     });
 }
