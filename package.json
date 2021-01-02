@@ -12,7 +12,8 @@
     "watch": "tsc --watch",
     "eslint": "eslint",
     "start": "node dist/index.js",
-    "stop": "fuser -s -k -INT 3000/tcp"
+    "stop": "fuser -s -k -INT 3000/tcp",
+    "deploy": "npm run build && gcloud functions deploy test-api --runtime nodejs10 --trigger-http --entry-point app --project mscz-api"
   },
   "author": "Librescore",
   "license": "GPL-3.0",
