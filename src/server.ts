@@ -28,6 +28,14 @@ app.use((req, res, next) => {
     next();
 });
 
+// Bad request if method is not POST
+app.use((req, res, next) => {
+    if (req.method != "POST") {
+        return res.status(400).end("Please use the POST method.");
+    }
+    next();
+});
+
 // Endpoints
 app.post("/:target", endpoints);
 app.post("/:target/:eid", endpoints);
