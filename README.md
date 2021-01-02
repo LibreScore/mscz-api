@@ -6,16 +6,7 @@ under the GPLv3.
 The rate limit is `100` API calls for ten minutes. An API call is one HTTP request.
 ### Metadata
 The `/meta` path takes a MSCZ file through a post request (`application/x-musescore`).
-and sends back a JSON file with metadata. Here would be an example of the metadata:
-```
-{
-    "title": "River Flows in You",
-    "author": "emmy langevin",
-    "instruments": [
-        "piano"
-    ]
-}
-```
+and sends back a JSON file with metadata.
 ### Conversion Formats
 For conversion, you `POST /<format>/<instrument>`. The available formats are `midi`,
 `mxml`, and `mmxl`. It will return the appropriate mime-type for `<format>`.
@@ -25,5 +16,7 @@ be made before conversion. Simply `POST /<format>` for the full score.
 Reason | Code 
 ----- | -----
 400 | Invalid format, invalid instrument, or malformed `mscz` file. 
-## Usage
-**_(TBD)_**
+## Examples
+Examples are available in `docs/examples`, with an mscz file, its metadata, and the
+various conversions for that file. All files there were converted with the API. Providing
+mscz files to convert would help. `GeneralUser Orchestral Example` provided by Generaluser GS.
