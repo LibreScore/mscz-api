@@ -39,4 +39,4 @@ function listen(): void {
     });
 }
 
-export default { server, app, listen };
+export { server, app, listen };

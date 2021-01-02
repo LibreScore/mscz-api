@@ -19,7 +19,7 @@
 import nconf from "nconf";
 import winston from "winston";
 import setupLogger from "./logger";
-import server from "./server";
+import * as server from "./server";
 
 // Set config
 nconf.argv().env({ separator: "." }).file({
@@ -47,3 +47,5 @@ server.listen();
 process.on("SIGINT", () => {
     process.exit(0);
 });
+
+export default server.app;
