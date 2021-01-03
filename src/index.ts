@@ -1,6 +1,6 @@
 /*
     HTTP API to manage MSCZ files.
-    Copyright (C) 2020  Librescore
+    Copyright (C) 2020-2021  Librescore
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -34,7 +34,7 @@ setupLogger();
 // Information
 
 winston.info(`mscz-api v${nconf.get("version")}`);
-winston.info("Copyright (C) 2020  Librescore");
+winston.info("Copyright (C) 2020-2021  Librescore");
 winston.info("This program comes with ABSOLUTELY NO WARRANTY");
 winston.info("This is free software, and you are welcome to redistribute it under certain conditions.");
 winston.info("---------------------------------------------------------------------------------------");
