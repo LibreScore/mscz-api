@@ -1,6 +1,5 @@
 # mscz-api
-This is a HTTP API to manage MSCZ files. The API is not public yet. Source code is
-under the GPLv3.
+This is a HTTP API to manage MSCZ files. The public API is at https://mscz-api.librescore.org/api. (Note: for the public API, you must prefix API calls with `/api`)Source code is under the GPLv3.
 ## Usage
 ### Rate limits
 The rate limit is `100` API calls for ten minutes. An API call is one HTTP request.
