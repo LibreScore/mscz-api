@@ -10,6 +10,13 @@ import LocalError from "./error";
 import winston from "winston";
 
 const ready = (async function () {
+    webmscore["stderr"] = byte => {
+        winston.debug(new Uint8Array(byte));
+    }
+    webmscore["stdout"] = byte => {
+        winston.debug(new Uint8Array(byte));
+    }
+
     await webmscore.ready;
 
     // Audio needs soundfonts
@@ -28,6 +35,7 @@ async function mkScore(scoreData: Uint8Array, excerpt = "", boost = true): Promi
         try {
             score = await webmscore.load("mscz", scoreData, [], false);
         } catch (e) {
+            console.warn(e);
             throw new LocalError(0);
         }
     } else {
