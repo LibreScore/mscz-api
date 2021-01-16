@@ -33,3 +33,16 @@ export default (): void => {
         ]
     });
 };
+
+export function getStreamWriter(logger: (msg: Uint8Array) => unknown): (byte: number) => void {
+    let buf = [] as number[];
+    return (byte: number) => {
+        if (byte === 0x0A /* \n */) {
+            // flush on newlines
+            logger(new Uint8Array(buf));
+            buf = [];
+        } else {
+            buf.push(byte);
+        }
+    };
+}

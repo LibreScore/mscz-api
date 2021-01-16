@@ -7,15 +7,12 @@ import webmscore from "webmscore";
 import SOUNDFONT_FILES from "@librescore/sf3";
 import fs from "fs";
 import LocalError from "./error";
+import { getStreamWriter } from "./logger";
 import winston from "winston";
 
 const ready = (async function () {
-    webmscore["stderr"] = byte => {
-        winston.debug(new Uint8Array(byte));
-    }
-    webmscore["stdout"] = byte => {
-        winston.debug(new Uint8Array(byte));
-    }
+    webmscore["stderr"] = getStreamWriter(winston.debug);
+    webmscore["stdout"] = getStreamWriter(winston.debug);
 
     await webmscore.ready;
 
