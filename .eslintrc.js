@@ -33,7 +33,7 @@ module.exports = {
         ],
         "eol-last": [
             "error",
-            "alwaysz"
+            "always"
         ]
     }
 };
