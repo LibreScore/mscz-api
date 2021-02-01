@@ -2,7 +2,9 @@
   "name": "mscz-api",
   "version": "0.5.1",
   "description": "HTTP API to manage MSCZ files.",
-  "main": "dist/index.js",
+  "engines": {
+    "node": "12"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/LibreScore/mscz-api.git"
@@ -13,7 +15,7 @@
     "eslint": "eslint",
     "start": "node dist/index.js",
     "stop": "fuser -s -k -INT 3000/tcp",
-    "deploy": "npm run build && gcloud functions deploy api --runtime nodejs12 --trigger-http --entry-point default --project mscz-api --memory=512M --region=us-west4 --allow-unauthenticated"
+    "deploy": "npm run build && firebase deploy --only functions:api,hosting"
   },
   "author": "Librescore",
   "license": "GPL-3.0",
@@ -27,7 +29,9 @@
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
     "express-rate-limit": "^5.2.3",
-    "nconf": "^0.11.1",
+    "firebase-admin": "^9.4.2",
+    "firebase-functions": "^3.13.1",
+    "nconf": "^0.11.2",
     "ts-custom-error": "^3.2.0",
     "webmscore": "^0.19.0",
     "winston": "^3.3.3"
