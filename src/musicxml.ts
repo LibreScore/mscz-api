@@ -8,7 +8,7 @@ export default (async (req, res) => {
     winston.http("MUSICXML accessed.");
 
     let score: webmscore;
-    try { score = await mscore.mkScore(req.body, req.params.eid); }
+    try { score = await mscore.mkScore(req.body, req.params.eid, false); }
     catch (e) {
         return error.handleHTTP(res, e);
     }
