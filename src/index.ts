@@ -31,21 +31,21 @@ nconf.set("version", require("../package.json").version);
 // Setup logger
 setupLogger();
 
-// Information
+if (require.main === module) { // this module was run directly from the command line as in node xxx.js
+    // Information
+    winston.info(`mscz-api v${nconf.get("version")}`);
+    winston.info("Copyright (C) 2020-2021  Librescore");
+    winston.info("This program comes with ABSOLUTELY NO WARRANTY");
+    winston.info("This is free software, and you are welcome to redistribute it under certain conditions.");
+    winston.info("---------------------------------------------------------------------------------------");
 
-winston.info(`mscz-api v${nconf.get("version")}`);
-winston.info("Copyright (C) 2020-2021  Librescore");
-winston.info("This program comes with ABSOLUTELY NO WARRANTY");
-winston.info("This is free software, and you are welcome to redistribute it under certain conditions.");
-winston.info("---------------------------------------------------------------------------------------");
+    // Server
+    server.listen();
 
-
-// Server
-server.listen();
-
-// handle SIGINT signal
-process.on("SIGINT", () => {
-    process.exit(0);
-});
+    // handle SIGINT signal
+    process.on("SIGINT", () => {
+        process.exit(0);
+    });
+}
 
 export default server.app;
