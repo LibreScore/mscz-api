@@ -11,3 +11,4 @@ temp/
 # logs and application-specific
 mscz-api.log
 dist/
+*firebase*
