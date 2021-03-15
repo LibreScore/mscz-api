@@ -5,21 +5,27 @@ import * as mscore from "./mscore";
 import * as error from "./error";
 
 export default (async (req, res) => {
-    winston.http("MIDI accessed.");
+  winston.http("MIDI accessed.");
 
-    let score: webmscore;
-    try { score = await mscore.mkScore(res.locals.type, req.body, req.params.eid); }
-    catch (e) {
-        return error.handleHTTP(res, e);
-    }
+  let score: webmscore;
+  try {
+    score = await mscore.mkScore(res.locals.type, req.body, req.params.eid);
+  } catch (e) {
+    return error.handleHTTP(res, e);
+  }
 
-    // Do the actual conversion.
-    const midi = await (score.saveMidi());
+  // Do the actual conversion.
+  const midi = await score.saveMidi();
 
-    // Send it off.
-    res.setHeader("Content-Disposition", `attachement; filename=${await score.titleFilenameSafe()}_${req.params.eid || "FULLSCORE"}.mid`);
-    res.contentType("audio/midi");
-    res.send(Buffer.from(midi));
+  // Send it off.
+  res.setHeader(
+    "Content-Disposition",
+    `attachement; filename=${await score.titleFilenameSafe()}_${
+      req.params.eid || "FULLSCORE"
+    }.mid`
+  );
+  res.contentType("audio/midi");
+  res.send(Buffer.from(midi));
 
-    score.destroy();
+  score.destroy();
 }) as RequestHandler;

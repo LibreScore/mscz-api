@@ -5,16 +5,17 @@ import * as mscore from "./mscore";
 import * as error from "./error";
 
 export default (async (req, res) => {
-    winston.http("META accessed.");
+  winston.http("META accessed.");
 
-    let score: webmscore;
-    try { score = await mscore.mkScore(res.locals.type, req.body) }
-    catch (e) {
-        return error.handleHTTP(res, e);
-    }
+  let score: webmscore;
+  try {
+    score = await mscore.mkScore(res.locals.type, req.body);
+  } catch (e) {
+    return error.handleHTTP(res, e);
+  }
 
-    const meta = await score.metadata();
-    res.json(meta);
+  const meta = await score.metadata();
+  res.json(meta);
 
-    score.destroy();
+  score.destroy();
 }) as RequestHandler;

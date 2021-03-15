@@ -10,32 +10,26 @@ import express from "express";
 */
 
 class LocalError extends CustomError {
-    public static errorDefinitions = [
-        "Invalid MSCZ file",
-        "Invalid excerpt/instrument id",
-        "Invalid path/conversion target",
-        "problem converting, internal server error"
-    ];
+  public static errorDefinitions = [
+    "Invalid MSCZ file",
+    "Invalid excerpt/instrument id",
+    "Invalid path/conversion target",
+    "problem converting, internal server error"
+  ];
 
-    public static errorCodes = [
-        400,
-        400,
-        404,
-        500
-    ];
+  public static errorCodes = [400, 400, 404, 500];
 
-    public static defaultError = "Unknown error.";
-    public constructor(
-        public code: number,
-        message?: string
-    ) {
-        super(message || LocalError.errorDefinitions[code] || LocalError.defaultError);
-    }
+  public static defaultError = "Unknown error.";
+  public constructor(public code: number, message?: string) {
+    super(
+      message || LocalError.errorDefinitions[code] || LocalError.defaultError
+    );
+  }
 }
 
 export default LocalError;
 
 function handleHTTP(res: express.Response, err: LocalError) {
-    res.status(LocalError.errorCodes[err.code] || 500).send(err.message);
+  res.status(LocalError.errorCodes[err.code] || 500).send(err.message);
 }
 export { handleHTTP };

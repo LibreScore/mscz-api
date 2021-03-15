@@ -8,24 +8,24 @@ import { RequestHandler } from "express";
 import LocalError, { handleHTTP } from "./error";
 
 const endpointDefs = {
-    "meta": meta,
+  meta: meta,
 
-    "midi": midi,
+  midi: midi,
 
-    "mxml": musicxml,
-    "mmxl": musicxml,
+  mxml: musicxml,
+  mmxl: musicxml,
 
-    "mp3": audio,
-    "ogg": audio,
-    "flac": audio,
-    "wav": audio,
+  mp3: audio,
+  ogg: audio,
+  flac: audio,
+  wav: audio,
 
-    "pdf": sheet
+  pdf: sheet
 };
 
 export default (async (req, res) => {
-    if (!endpointDefs[req.params.target]) {
-        return handleHTTP(res, new LocalError(2));
-    }
-    await endpointDefs[req.params.target](req, res);
+  if (!endpointDefs[req.params.target]) {
+    return handleHTTP(res, new LocalError(2));
+  }
+  await endpointDefs[req.params.target](req, res);
 }) as RequestHandler;
