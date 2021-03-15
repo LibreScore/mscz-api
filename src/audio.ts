@@ -8,7 +8,7 @@ export default (async (req, res) => {
     winston.http("AUDIO accessed");
 
     let score: webmscore;
-    try { score = await mscore.mkScore(req.body, req.params.eid, false); }
+    try { score = await mscore.mkScore(res.locals.type, req.body, req.params.eid, false); }
     catch (e) {
         return error.handleHTTP(res, e);
     }

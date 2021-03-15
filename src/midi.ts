@@ -8,7 +8,7 @@ export default (async (req, res) => {
     winston.http("MIDI accessed.");
 
     let score: webmscore;
-    try { score = await mscore.mkScore(req.body, req.params.eid); }
+    try { score = await mscore.mkScore(res.locals.type, req.body, req.params.eid); }
     catch (e) {
         return error.handleHTTP(res, e);
     }

@@ -16,6 +16,28 @@ app.use(rateLimit({
     max: nconf.get("limiter:requests") || 100
 }));
 
+// Set source type
+app.use((req, res, next) => {
+    if (!req.headers["content-type"]) {
+        return res.status(400).end("Content-Type not specified");
+    }
+
+    const ctype = req.headers["content-type"]
+    if (ctype == "application/x-musescore") {
+        res.locals.type = "mscz";
+    } else if (ctype == "audio/midi") {
+        res.locals.type = "midi";
+    } else if (ctype == "application/xml") {
+        res.locals.type = "musicxml";
+    } else if (ctype == "application/vnd.recordare.musicxml") {
+        res.locals.type = "mxl";
+    } else {
+        return res.status(400).end("Invalid Content-Type");
+    }
+
+    next();
+});
+
 // Raw body for MSCZ file.
 app.use(bodyParser.raw({
     type: "application/x-musescore",

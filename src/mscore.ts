@@ -10,6 +10,8 @@ import LocalError from "./error";
 import { getStreamWriter } from "./logger";
 import winston from "winston";
 
+type scoreType = "mscz" | "mxl" | "musicxml" | "midi";
+
 const ready = (async function () {
     webmscore["stderr"] = getStreamWriter(winston.debug);
     webmscore["stdout"] = getStreamWriter(winston.debug);
@@ -24,21 +26,24 @@ const ready = (async function () {
 })();
 
 // Init score with boost mode.
-async function mkScore(scoreData: Uint8Array, excerpt = "", boost = true): Promise<webmscore> {
+async function mkScore(t: scoreType, scoreData: Uint8Array, excerpt = "", boost = true): Promise<webmscore> {
     await ready;
+
+    winston.debug(`Type: ${t}`);
 
     let score: webmscore;
     if (boost) {
         try {
-            score = await webmscore.load("mscz", scoreData, [], false);
+            score = await webmscore.load(t, scoreData, [], false);
         } catch (e) {
-            console.warn(e);
+            winston.debug(`(mscore 39): ${e}`);
             throw new LocalError(0);
         }
     } else {
         try {
-            score = await webmscore.load("mscz", scoreData);
+            score = await webmscore.load(t, scoreData);
         } catch (e) {
+            winston.debug(`(mscore 46): ${e}`);
             throw new LocalError(0);
         }
     }

@@ -5,29 +5,45 @@ import * as mscore from "./mscore";
 import * as error from "./error";
 
 export default (async (req, res) => {
-    winston.http("MUSICXML accessed.");
+  winston.http("MUSICXML accessed.");
 
-    let score: webmscore;
-    try { score = await mscore.mkScore(req.body, req.params.eid, false); }
-    catch (e) {
-        return error.handleHTTP(res, e);
-    }
+  let score: webmscore;
+  try {
+    score = await mscore.mkScore(
+      res.locals.type,
+      req.body,
+      req.params.eid,
+      false
+    );
+  } catch (e) {
+    return error.handleHTTP(res, e);
+  }
 
-    if (req.params.target === "mmxl") {
-        const mxml = await (score.saveMxl());
+  if (req.params.target === "mmxl") {
+    const mxml = await score.saveMxl();
 
-        // Send it off.
-        res.setHeader("Content-Disposition", `attachement; filename=${await score.titleFilenameSafe()}_${req.params.eid || "FULLSCORE"}.mxl`);
-        res.contentType("application/vnd.recordare.musicxml");
-        res.send(Buffer.from(mxml));
-    } else {
-        const mxml = await (score.saveXml());
+    // Send it off.
+    res.setHeader(
+      "Content-Disposition",
+      `attachement; filename=${await score.titleFilenameSafe()}_${
+        req.params.eid || "FULLSCORE"
+      }.mxl`
+    );
+    res.contentType("application/vnd.recordare.musicxml");
+    res.send(Buffer.from(mxml));
+  } else {
+    const mxml = await score.saveXml();
 
-        // Send it off.
-        res.setHeader("Content-Disposition", `attachement; filename=${await score.titleFilenameSafe()}_${req.params.eid || "FULLSCORE"}.musicxml`);
-        res.contentType("application/xml");
-        res.send(mxml);
-    }
+    // Send it off.
+    res.setHeader(
+      "Content-Disposition",
+      `attachement; filename=${await score.titleFilenameSafe()}_${
+        req.params.eid || "FULLSCORE"
+      }.musicxml`
+    );
+    res.contentType("application/xml");
+    res.send(mxml);
+  }
 
-    score.destroy();
+  score.destroy();
 }) as RequestHandler;

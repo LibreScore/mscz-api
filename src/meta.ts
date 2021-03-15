@@ -8,7 +8,7 @@ export default (async (req, res) => {
     winston.http("META accessed.");
 
     let score: webmscore;
-    try { score = await mscore.mkScore(req.body) }
+    try { score = await mscore.mkScore(res.locals.type, req.body) }
     catch (e) {
         return error.handleHTTP(res, e);
     }
