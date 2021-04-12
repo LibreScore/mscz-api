@@ -16,7 +16,7 @@
     "start": "node dist/index.js",
     "stop": "fuser -s -k -INT 3000/tcp",
     "deploy": "npm run build && cp package.json functions/ && firebase deploy --only functions:api,hosting",
-    "lint": "prettier .",
+    "lint": "prettier",
     "format": "prettier -w ."
   },
   "author": "Librescore",
